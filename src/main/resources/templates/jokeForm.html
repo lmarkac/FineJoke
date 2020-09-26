@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Joke input form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <h1>Joke input form</h1>
+
+    <form id="validateDataAndSubmitOrFail()" action="#">
+        <h2>Please provide joke content and category</h2>
+
+        <span id="contentErrorMessage"></span>
+        <input th:field="${jokeContentField}" id="jokeContent" type="text" class="form-control" placeholder="Joke content..." aria-label="Joke content..." aria-describedby="basic-addon1">
+
+        <span id="categoryErrorMessage"></span>
+        <select class="form-control selectpicker" >
+            <option id="selectedCategory" th:each="category : ${categories}" th:text="${category}"></option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script type="text/javascript" src="form.js"></script>
+</div>
+
+</body>
+</html>
