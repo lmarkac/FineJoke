@@ -1,5 +1,6 @@
 package com.hr.luka.finejoke.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ public class JokeDataAccessService implements JokeDao{
 
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public JokeDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

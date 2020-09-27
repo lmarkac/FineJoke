@@ -11,12 +11,14 @@
 
     <h1>Joke input form</h1>
 
+    <br/>
     <form id="validateDataAndSubmitOrFail()" action="#">
         <h2>Please provide joke content and category</h2>
 
         <span id="contentErrorMessage"></span>
         <input th:field="${jokeContentField}" id="jokeContent" type="text" class="form-control" placeholder="Joke content..." aria-label="Joke content..." aria-describedby="basic-addon1">
 
+        <br/>
         <span id="categoryErrorMessage"></span>
         <select class="form-control selectpicker" >
             <option id="selectedCategory" th:each="category : ${categories}" th:text="${category}"></option>
