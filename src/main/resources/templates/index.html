@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>FineJoke</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <p class="lead">Fine Joke</p>
+        <hr class="my-4">
+        <p>
+            <span>The best joke site in the world. Even this app is a joke!</span>
+        </p>
+
+    </div>
+    <table class="table">
+        <tr>
+            <td>#</td>
+            <td>Kategorija</td>
+            <td>Vic</td>
+            <td>Likes</td>
+            <td>Dislikes</td>
+            <td>Razlika</td>
+        </tr>
+        <tr th:each="joke,iter : ${allJokes}">
+            <td th:text="${iter.index} + 1"></td>
+            <div th:each="category : ${allCategories}">
+                <td th:if="${category.id == joke.id}" th:text="${category.name}"></td>
+            </div>
+            <td th:text="${joke.content}"></td>
+            <td th:text="${joke.likes}">0</td>
+            <td th:text="${joke.dislikes}">0</td>
+            <td th:text="${joke.likes} - ${joke.dislikes}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
