@@ -1,6 +1,8 @@
 package com.hr.luka.finejoke.service;
 
 import com.hr.luka.finejoke.dao.JokeDao;
+import com.hr.luka.finejoke.entity.Category;
+import com.hr.luka.finejoke.entity.Joke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,18 +25,15 @@ public class JokeService {
         return jokeDao.submitJoke(content, category);
     }
 
-    private List<String> testList = new ArrayList<>();
-
-    public List<String> getTestList() {
-        return testList;
-    }
-
     @PostConstruct
-    public void populateList(){
-        System.out.println("adding options...");
-        testList.add("Op1");
-        testList.add("Op2");
-        testList.add("Op3");
+    public List<Joke> getAllJokes(){
+        return jokeDao.getAllJokes();
     }
+
+    public List<Category> getAllCategories(){
+        return jokeDao.getAllCategories();
+    }
+
+
 
 }

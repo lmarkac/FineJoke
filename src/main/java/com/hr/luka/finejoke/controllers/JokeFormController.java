@@ -16,7 +16,7 @@ public class JokeFormController {
     @GetMapping("/new")
     public String jokeForm(Model model){
         model.addAttribute("jokeContentField", "Joke Content");
-        model.addAttribute("categories", jokeService.getTestList());
+        model.addAttribute("categories", jokeService.getAllCategories());
         return "jokeForm";
     }
 }
