@@ -43,7 +43,7 @@ public class JokeDataAccessService implements JokeDao{
 
     public List<Joke> getAllJokes(){
 
-        String sqlFetchJokes = "SELECT * FROM joke;";
+        String sqlFetchJokes = "SELECT * FROM joke ORDER BY (likes - dislikes) DESC;";
 
         jokeList = jdbcTemplate.query(sqlFetchJokes, (resultSet, rowNumber) ->{
            int id = resultSet.getInt("id");
