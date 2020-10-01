@@ -1,5 +1,6 @@
 package com.hr.luka.finejoke.dao;
 
+import com.hr.luka.finejoke.controllers.JokeFormController;
 import com.hr.luka.finejoke.entity.Category;
 import com.hr.luka.finejoke.entity.Joke;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +25,10 @@ public class JokeDataAccessService implements JokeDao{
     }
 
     @Override
-    public int submitJoke(String content, String category) {
+    public int submitJoke(Joke joke) throws RuntimeException{
+        String sqlInsert = "INSERT INTO joke (id, content) VALUES (?, ?)";
+        return jdbcTemplate.update(sqlInsert, new Object[]{joke.getId(), joke.getContent()});
 
-        final String sqlFetchCategoryId = "SELECT id FROM category WHERE name LIKE '?'";
-
-        Optional<Integer> id = getId(category, sqlFetchCategoryId);
-
-        final String sql = "INSERT INTO joke (id, name) VALUES (?, ?);";
-
-        Object[] args = new Object[] {id, category};
-
-        return jdbcTemplate.update(sql, args);
     }
 
     private Optional getId(String category, String sqlFetchCategoryId) {

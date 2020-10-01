@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface JokeDao {
 
-    int submitJoke(String content, String category);
+    int submitJoke(Joke joke);
     int deleteJokeById(UUID id);
     void modifyJokeById(UUID id);
     List<Joke> getAllJokes();

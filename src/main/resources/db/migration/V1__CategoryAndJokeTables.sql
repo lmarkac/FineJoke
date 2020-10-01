@@ -1,14 +1,14 @@
 CREATE TABLE category (
 
 	id SERIAL NOT NULL PRIMARY KEY,
-	name VARCHAR(100) NOT NULL
+	name VARCHAR(100) NOT NULL CHECK (name <> '')
 
 );
 
 CREATE TABLE joke (
 
 	id int NOT NULL,
-	content VARCHAR(400) NOT NULL,
+	content VARCHAR(400) NOT NULL CHECK (content <> ''),
 	likes int DEFAULT 0,
 	dislikes int DEFAULT 0
 );

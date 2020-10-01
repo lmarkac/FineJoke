@@ -21,8 +21,8 @@ public class JokeService {
         this.jokeDao = jokeDao;
     }
 
-    public int submitJoke(String content, String category) {
-        return jokeDao.submitJoke(content, category);
+    public int submitJoke(Joke joke) {
+        return jokeDao.submitJoke(joke);
     }
 
     @PostConstruct

@@ -9,25 +9,44 @@
 <body>
 <div class="container">
 
-    <h1>Joke input form</h1>
+    <h1 class="display-4" style="text-align:center">Joke input form</h1>
 
     <br/>
-    <form id="validateDataAndSubmitOrFail()" action="#">
-        <h2>Please provide joke content and category</h2>
+    <form th:action="@{/new}" th:object="${joke}" method="post">
+        <tr>
+            <td>
+                <div class="w-100 p-3" style="background-color: #eee;">
+                    <div class="input-group input-group-lg">
+                        <textarea class="form-control" aria-label="With textarea" th:field="*{content}"></textarea>
+                    </div>
+                </div>
+            </td>
+        </tr>
 
-        <span id="contentErrorMessage"></span>
-        <input th:field="${jokeContentField}" id="jokeContent" type="text" class="form-control" placeholder="Joke content..." aria-label="Joke content..." aria-describedby="basic-addon1">
 
         <br/>
-        <span id="categoryErrorMessage"></span>
-        <select class="form-control selectpicker" >
-            <option id="selectedCategory" th:each="category : ${categories}" th:text="${category.name}"></option>
-        </select>
+        <tr>
+            <td>
+                <select class="form-control form-control-lg" th:field="*{id}">
+                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+                </select>
+            </td>
+        </tr>
 
-        <input type="submit" value="Submit">
+        <br/>
+        <br/>
+        <br/>
+
+        <tr>
+            <td>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" value="Submit" class="btn btn-primary btn-block">Submit it!</button>
+                </div>
+            </td>
+        </tr>
+
     </form>
-    <script type="text/javascript" src="form.js"></script>
 </div>
-
+</div>
 </body>
 </html>

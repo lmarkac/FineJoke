@@ -14,6 +14,9 @@ public class Joke {
         this.dislikes = dislikes;
     }
 
+    public Joke() {
+    }
+
     @Override
     public String toString() {
         return "Joke{" +

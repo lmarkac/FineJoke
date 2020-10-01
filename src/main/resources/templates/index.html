@@ -8,12 +8,16 @@
 <body>
 <div class="container">
     <div class="jumbotron">
-        <p class="lead">Fine Joke</p>
+        <h1 class="lead display-4">Fine Joke</h1>
         <hr class="my-4">
         <p>
             <span>The best joke site in the world. Even this app is a joke!</span>
         </p>
 
+    </div>
+    <h1 class="display-4" style="text-align:center">Insert a new joke!</h1>
+    <div class="card sticky-top">
+        <a href="#" th:href="@{/new}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Insert it!</a>
     </div>
     <table class="table">
         <tr>
