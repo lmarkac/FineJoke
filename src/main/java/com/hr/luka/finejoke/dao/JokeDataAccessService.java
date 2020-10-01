@@ -65,13 +65,15 @@ public class JokeDataAccessService implements JokeDao{
         return categoryList;
     }
 
-    @Override
-    public int deleteJokeById(UUID id) {
+    public int like(Joke joke){
+        String sqlUpdateJoke = "UPDATE joke SET likes = ? WHERE joke.content LIKE ?";
+        System.out.println("Ušo");
+
+        return jdbcTemplate.update(sqlUpdateJoke, joke.getLikes() + 1, joke.getContent());
+    }
+
+    public int dislike(Joke joke){
         return 0;
     }
 
-    @Override
-    public void modifyJokeById(UUID id) {
-
-    }
 }

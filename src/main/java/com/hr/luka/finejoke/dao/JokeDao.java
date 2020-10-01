@@ -9,8 +9,8 @@ import java.util.UUID;
 public interface JokeDao {
 
     int submitJoke(Joke joke);
-    int deleteJokeById(UUID id);
-    void modifyJokeById(UUID id);
     List<Joke> getAllJokes();
     List<Category> getAllCategories();
+    int like(Joke joke);
+    int dislike(Joke joke);
 }

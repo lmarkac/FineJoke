@@ -25,7 +25,10 @@ public class JokeService {
         return jokeDao.submitJoke(joke);
     }
 
-    @PostConstruct
+    public int like(Joke joke){
+        return jokeDao.like(joke);
+    }
+
     public List<Joke> getAllJokes(){
         return jokeDao.getAllJokes();
     }

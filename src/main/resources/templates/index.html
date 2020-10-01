@@ -16,9 +16,7 @@
 
     </div>
     <h1 class="display-4" style="text-align:center">Insert a new joke!</h1>
-    <div class="card sticky-top">
-        <a href="#" th:href="@{/new}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Insert it!</a>
-    </div>
+    <a href="#" th:href="@{/new}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Insert it!</a>
     <table class="table">
         <tr>
             <td>#</td>
@@ -34,8 +32,8 @@
                 <td th:if="${category.id == joke.id}" th:text="${category.name}"></td>
             </div>
             <td th:text="${joke.content}"></td>
-            <td th:text="${joke.likes}">0</td>
-            <td th:text="${joke.dislikes}">0</td>
+            <td> <a href="#" th:action="@{/}" th:method="like" th:text="${joke.likes}"/></td>
+            <td> <a href="#" th:action="@{/}" th:method="dislike" th:text="${joke.dislikes}"/></td>
             <td th:text="${joke.likes} - ${joke.dislikes}"></td>
         </tr>
     </table>
