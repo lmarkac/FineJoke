@@ -6,9 +6,7 @@ import com.hr.luka.finejoke.service.JokeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +14,9 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class IndexPageController {
 
-    @Autowired
     JokeService jokeService;
-    
+
+    @Autowired
     public IndexPageController(JokeService jokeService) {
         this.jokeService = jokeService;
     }
@@ -35,8 +33,5 @@ public class IndexPageController {
         return "index";
     }
 
-    @PutMapping("/")
-    public int like(Joke joke){
-        return jokeService.like(joke);
-    }
+
 }

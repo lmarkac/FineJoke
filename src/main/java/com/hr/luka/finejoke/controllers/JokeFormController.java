@@ -12,8 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class JokeFormController {
 
-    @Autowired
     JokeService jokeService;
+
+    @Autowired
+    public JokeFormController(JokeService jokeService) {
+        this.jokeService = jokeService;
+    }
 
     @GetMapping("/new")
     public String jokeForm(Model model){

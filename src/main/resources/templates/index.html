@@ -4,6 +4,7 @@
     <title>FineJoke</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/action.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -16,7 +17,9 @@
 
     </div>
     <h1 class="display-4" style="text-align:center">Insert a new joke!</h1>
-    <a href="#" th:href="@{/new}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Insert it!</a>
+    <div class="card sticky-top">
+        <a href="#" th:href="@{/new}" class="btn btn-primary btn-block" role="button" aria-pressed="true">Insert it!</a>
+    </div>
     <table class="table">
         <tr>
             <td>#</td>
@@ -27,13 +30,33 @@
             <td>Razlika</td>
         </tr>
         <tr th:each="joke,iter : ${allJokes}">
+
+            <!-- prvi stupac -->
             <td th:text="${iter.index} + 1"></td>
+
+            <!-- drugi stupac -->
             <div th:each="category : ${allCategories}">
-                <td th:if="${category.id == joke.id}" th:text="${category.name}"></td>
+                <td th:if="${category.id} == ${joke.category_id}" th:text="${category.name}"></td>
             </div>
+
+            <!-- treci stupac -->
             <td th:text="${joke.content}"></td>
-            <td> <a href="#" th:action="@{/}" th:method="like" th:text="${joke.likes}"/></td>
-            <td> <a href="#" th:action="@{/}" th:method="dislike" th:text="${joke.dislikes}"/></td>
+
+            <!-- cetvrti stupac -->
+            <td>
+                <form th:action="@{/}" th:object="${joke}" th:method="put">
+                    <button type="button" class="btn btn-primary btn-block btn-success" th:onclick="|likeAJoke('${joke.id}')|" th:text="${joke.likes}"></button>
+                </form>
+            </td>
+
+            <!-- peti stupac -->
+            <td>
+                <form th:action="@{/}" th:object="${joke}" th:method="put">
+                    <button type="button" class="btn-primary btn-block btn btn-danger" th:onclick="|dislikeAJoke('${joke.id}')|" th:text="${joke.dislikes}"></button>
+                </form>
+            </td>
+
+            <!-- sesti stupac -->
             <td th:text="${joke.likes} - ${joke.dislikes}"></td>
         </tr>
     </table>

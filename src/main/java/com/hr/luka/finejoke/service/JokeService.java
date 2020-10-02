@@ -25,8 +25,12 @@ public class JokeService {
         return jokeDao.submitJoke(joke);
     }
 
-    public int like(Joke joke){
-        return jokeDao.like(joke);
+    public void like(int id){
+        jokeDao.like(id);
+    }
+
+    public void dislike(int id){
+        jokeDao.dislike(id);
     }
 
     public List<Joke> getAllJokes(){

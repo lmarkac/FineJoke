@@ -1,6 +1,5 @@
 package com.hr.luka.finejoke.dao;
 
-import com.hr.luka.finejoke.controllers.JokeFormController;
 import com.hr.luka.finejoke.entity.Category;
 import com.hr.luka.finejoke.entity.Joke;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("postgres")
 public class JokeDataAccessService implements JokeDao{
@@ -26,8 +24,8 @@ public class JokeDataAccessService implements JokeDao{
 
     @Override
     public int submitJoke(Joke joke) throws RuntimeException{
-        String sqlInsert = "INSERT INTO joke (id, content) VALUES (?, ?)";
-        return jdbcTemplate.update(sqlInsert, new Object[]{joke.getId(), joke.getContent()});
+        String sqlInsert = "INSERT INTO joke (category_id, content) VALUES (?, ?)";
+        return jdbcTemplate.update(sqlInsert, new Object[]{joke.getCategory_id(), joke.getContent()});
 
     }
 
@@ -40,12 +38,14 @@ public class JokeDataAccessService implements JokeDao{
         String sqlFetchJokes = "SELECT * FROM joke ORDER BY (likes - dislikes) DESC;";
 
         jokeList = jdbcTemplate.query(sqlFetchJokes, (resultSet, rowNumber) ->{
+
            int id = resultSet.getInt("id");
+           int category_id = resultSet.getInt("category_id");
            String content = resultSet.getString("content");
            int likes = resultSet.getInt("likes");
            int dislikes = resultSet.getInt("dislikes");
 
-           return new Joke(id, content, likes, dislikes);
+           return new Joke(id, category_id, content, likes, dislikes);
         });
 
         return jokeList;
@@ -65,15 +65,16 @@ public class JokeDataAccessService implements JokeDao{
         return categoryList;
     }
 
-    public int like(Joke joke){
-        String sqlUpdateJoke = "UPDATE joke SET likes = ? WHERE joke.content LIKE ?";
-        System.out.println("Ušo");
+    public void like(int id){
+        String sqlUpdateJoke = "UPDATE joke SET likes = likes + 1 WHERE joke.id = ?";
 
-        return jdbcTemplate.update(sqlUpdateJoke, joke.getLikes() + 1, joke.getContent());
+        jdbcTemplate.update(sqlUpdateJoke, id);
     }
 
-    public int dislike(Joke joke){
-        return 0;
+    public void dislike(int id){
+        String sqlUpdateJoke = "UPDATE joke SET dislikes = dislikes + 1 WHERE joke.id = ?";
+
+        jdbcTemplate.update(sqlUpdateJoke, id);
     }
 
 }

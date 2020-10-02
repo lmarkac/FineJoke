@@ -11,6 +11,6 @@ public interface JokeDao {
     int submitJoke(Joke joke);
     List<Joke> getAllJokes();
     List<Category> getAllCategories();
-    int like(Joke joke);
-    int dislike(Joke joke);
+    void like(int id);
+    void dislike(int id);
 }
