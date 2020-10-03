@@ -2,10 +2,12 @@ package com.hr.luka.finejoke.dao;
 
 import com.hr.luka.finejoke.entity.Category;
 import com.hr.luka.finejoke.entity.Joke;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +53,38 @@ public class JokeDataAccessService implements JokeDao{
         return jokeList;
     }
 
+    public List<List<Joke>> getJokesPaginated(List<Joke> jokeList) {
+        List<List<Joke>> jokeListPaginated = ListUtils.partition(jokeList, 10);
+        return jokeListPaginated;
+    }
+
+    public List<Joke> getCertainJokePage(int pageNumber){
+
+        String sqlFetchJokes = null;
+
+        if(pageNumber == 1){
+            sqlFetchJokes = "SELECT * FROM joke ORDER BY (likes - dislikes) DESC LIMIT 10;";
+        }else if(pageNumber > 1){
+            sqlFetchJokes = "SELECT * FROM joke ORDER BY (likes - dislikes) DESC LIMIT 10 OFFSET " + --pageNumber * 10 + ";";
+        }else{
+            System.out.println("jesus wtf sqlFetchJokes je null");
+        }
+
+        jokeList = jdbcTemplate.query(sqlFetchJokes, (resultSet, rowNumber) ->{
+
+            int id = resultSet.getInt("id");
+            int category_id = resultSet.getInt("category_id");
+            String content = resultSet.getString("content");
+            int likes = resultSet.getInt("likes");
+            int dislikes = resultSet.getInt("dislikes");
+
+            return new Joke(id, category_id, content, likes, dislikes);
+        });
+
+        return jokeList;
+    }
+
+
     @Override
     public List<Category> getAllCategories() {
         String sqlFetchCategories = "SELECT * FROM category;";
@@ -76,5 +110,4 @@ public class JokeDataAccessService implements JokeDao{
 
         jdbcTemplate.update(sqlUpdateJoke, id);
     }
-
 }

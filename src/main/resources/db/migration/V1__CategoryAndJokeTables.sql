@@ -11,15 +11,20 @@ CREATE TABLE joke (
 	category_id int NOT NULL,
 	content VARCHAR(400) NOT NULL CHECK (content <> ''),
 	likes int DEFAULT 0,
-	dislikes int DEFAULT 0
+	dislikes int DEFAULT 0,
+	CONSTRAINT joke_foreign_key
+	    FOREIGN KEY (category_id)
+	        REFERENCES category(id)
 );
 
+-- CATEGORY --
 INSERT INTO category (name)
 VALUES ('Crni humor'),
        ('Policajci'),
        ('Pijanci'),
        ('Izreke');
 
+-- JOKE --
 -- kategorija: Crni humor
 INSERT INTO joke (category_id, content, likes, dislikes)
 VALUES (1, 'Kad umiru šećeraši? Onda kad im je najslađe.', 14, 3),

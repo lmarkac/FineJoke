@@ -29,10 +29,15 @@
             <td>Dislikes</td>
             <td>Razlika</td>
         </tr>
-        <tr th:each="joke,iter : ${allJokes}">
+        <!--
+        <div th:each="jokePage : ${allJokesPaginated}">
+
+        </div>
+        -->
+        <tr th:each="joke,iter : ${currentPage} == null ? ${firstJokePage} : ${currentPage}">
 
             <!-- prvi stupac -->
-            <td th:text="${iter.index} + 1"></td>
+            <td th:with="counter = ${(iter.index + 1) + (currentPageNumber == null ? 0 : (currentPageNumber - 1) * 10)}" th:text="${counter}"></td>
 
             <!-- drugi stupac -->
             <div th:each="category : ${allCategories}">
@@ -60,6 +65,13 @@
             <td th:text="${joke.likes} - ${joke.dislikes}"></td>
         </tr>
     </table>
+    <div style="text-align: center">
+        <nav aria-label="Page navigation">
+            <ul style="display: inline-block" class="pagination" th:each="jokePage, iter : ${allJokesPaginated}">
+                <li class="page-item"><a class="page-link" th:href="@{/page/} + (${iter.index} + 1)" th:method="get" th:text="${iter.index} + 1"/></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 </body>

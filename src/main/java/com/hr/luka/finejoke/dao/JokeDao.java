@@ -13,4 +13,6 @@ public interface JokeDao {
     List<Category> getAllCategories();
     void like(int id);
     void dislike(int id);
+    List<Joke> getCertainJokePage(int page);
+    List<List<Joke>> getJokesPaginated(List<Joke> jokeList);
 }

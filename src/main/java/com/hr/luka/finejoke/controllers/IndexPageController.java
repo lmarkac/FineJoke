@@ -1,6 +1,5 @@
 package com.hr.luka.finejoke.controllers;
 
-import com.hr.luka.finejoke.entity.Category;
 import com.hr.luka.finejoke.entity.Joke;
 import com.hr.luka.finejoke.service.JokeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,15 @@ public class IndexPageController {
     @GetMapping("/")
     public String index(Model model){
 
-        List<Joke> allJokes = jokeService.getAllJokes();
-        List<Category> allCategories = jokeService.getAllCategories();
+        List<Joke> jokeList = jokeService.getAllJokes();
+        List<List<Joke>> allJokesPaginated = jokeService.getJokesPaginated(jokeList);
 
-        model.addAttribute("allJokes", allJokes);
-        model.addAttribute("allCategories", allCategories);
+        model.addAttribute("allJokes", jokeList);
+        model.addAttribute("allCategories", jokeService.getAllCategories());
+        model.addAttribute("allJokesPaginated", allJokesPaginated);
+        model.addAttribute("numberOfPages", allJokesPaginated.size());
+        model.addAttribute("firstJokePage", allJokesPaginated.get(0));
 
         return "index";
     }
-
-
 }
