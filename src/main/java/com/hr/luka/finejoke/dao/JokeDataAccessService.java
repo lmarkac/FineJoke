@@ -100,6 +100,8 @@ public class JokeDataAccessService implements JokeDao{
     }
 
     public void like(int id){
+
+        System.out.println("Ulazim");
         String sqlUpdateJoke = "UPDATE joke SET likes = likes + 1 WHERE joke.id = ?";
 
         jdbcTemplate.update(sqlUpdateJoke, id);
