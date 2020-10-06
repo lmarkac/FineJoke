@@ -3,13 +3,10 @@ package com.hr.luka.finejoke.service;
 import com.hr.luka.finejoke.dao.JokeDao;
 import com.hr.luka.finejoke.entity.Category;
 import com.hr.luka.finejoke.entity.Joke;
-import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

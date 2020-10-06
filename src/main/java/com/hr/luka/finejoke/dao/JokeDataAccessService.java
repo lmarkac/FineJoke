@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,7 +100,6 @@ public class JokeDataAccessService implements JokeDao{
 
     public void like(int id){
 
-        System.out.println("Ulazim");
         String sqlUpdateJoke = "UPDATE joke SET likes = likes + 1 WHERE joke.id = ?";
 
         jdbcTemplate.update(sqlUpdateJoke, id);
