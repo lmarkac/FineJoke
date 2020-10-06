@@ -34,4 +34,19 @@ public class IndexPageController {
 
         return "index";
     }
+
+    @GetMapping(path = "/page/{id}")
+    public String getCertainJokePage(@PathVariable("id") int id, Model model){
+        try{
+            model.addAttribute("currentPage", jokeService.getCertainJokePage(id));
+            model.addAttribute("currentPageNumber", id);
+            return index(model);
+        }catch (RuntimeException e){
+            System.out.println("The requested page does not exist. Perhaps the path is wrong?");
+        }
+
+        return null;
+    }
+
+
 }
