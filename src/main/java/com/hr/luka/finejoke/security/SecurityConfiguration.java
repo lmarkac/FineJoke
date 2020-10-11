@@ -29,6 +29,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure()
+                .and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/page/**").permitAll()
@@ -40,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
+
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
