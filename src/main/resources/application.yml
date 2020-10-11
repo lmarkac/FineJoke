@@ -1,6 +1,6 @@
 app:
     datasource:
-        jdbc-url: jdbc:postgresql://localhost:5432/finejoke
-        username: postgres
-        password: Humil1ator123
+        jdbc-url: jdbc:postgresql://ec2-34-238-26-109.compute-1.amazonaws.com:5432/d2qjek9pcvs2ul
+        username: vugbtvfpgkphpx
+        password: 511087cca0d9b0968aecd9c307e1b8f1754bc793c2c2a46bda072cd9e6712968
         pool-size: 30
