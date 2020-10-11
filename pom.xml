@@ -14,10 +14,6 @@
 	<name>finejoke</name>
 	<description>The best joke site ever produced I swear</description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
-
 	<dependencies>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
