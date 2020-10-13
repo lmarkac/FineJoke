@@ -17,6 +17,7 @@ public class LikeAndDislikeRestController {
 
     @PutMapping(path = "/like/{id}")
     public void like(@PathVariable("id") int id){
+        System.out.println("Uso");
         jokeService.like(id);
     }
 
